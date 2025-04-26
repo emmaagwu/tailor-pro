@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import { cn } from "@/lib/utils"
 
 interface MarqueeProps {
@@ -21,16 +21,13 @@ export default function Marquee({
   repeat = 3,
 }: MarqueeProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [contentWidth, setContentWidth] = useState(0)
 
-  // Set animation duration based on speed prop
   const speedMap = {
     slow: "40s",
     normal: "35s",
     fast: "15s",
   }
 
-  // Create repeated text with proper spacing
   const repeatedText = Array(repeat)
     .fill(text)
     .map((item, index) => (
@@ -38,13 +35,6 @@ export default function Marquee({
         {item}
       </span>
     ))
-
-  // Measure content width for animation
-  useEffect(() => {
-    if (containerRef.current) {
-      setContentWidth(containerRef.current.scrollWidth)
-    }
-  }, [text])
 
   return (
     <div className={cn("overflow-hidden whitespace-nowrap py-4 font-medium", className)} style={{ backgroundColor }}>
@@ -60,7 +50,6 @@ export default function Marquee({
         {repeatedText}
       </div>
 
-      {/* Scoped styles for the marquee animation */}
       <style jsx>{`
         @keyframes marquee {
           0% {
