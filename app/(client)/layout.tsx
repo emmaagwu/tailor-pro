@@ -1,3 +1,4 @@
+import Marquee from "../components/client/marquee";
 import Navbar from "../components/client/navbar";
 
 
@@ -9,6 +10,11 @@ export default function ClientLayout({
   return (
       <div>
         <Navbar />
+        <Marquee
+          text="We offer 25% discount during the Black Friday Sales. Dont! Miss it..."
+          speed="normal"
+        />
+
         {children}
      </div>
   );
