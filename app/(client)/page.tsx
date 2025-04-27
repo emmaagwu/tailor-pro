@@ -27,6 +27,7 @@
 import HeroSection from '../components/client/hero-section'
 import ProductSection from '../components/client/product-section/product-section'
 import WearDisplay from '../components/client/product-section/wear-display'
+import { ShowcaseSection, ShowcaseCard } from "../components/client/showcase-section"
 
 // Sample product data
 const kaftanProducts = [
@@ -54,6 +55,15 @@ const shirtProducts = [
   { id: 2, code: "SH002", price: 349.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
   { id: 3, code: "SH003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
   { id: 4, code: "SH003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+]
+
+
+const showcaseItems = [
+  { id: 1, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161", altText: "Red fabric detail" },
+  { id: 2, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161", altText: "Blue fabric detail" },
+  { id: 3, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161", altText: "Green fabric detail" },
+  { id: 4, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161", altText: "Yellow fabric detail" },
+  { id: 5, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161", altText: "Purple fabric detail" },
 ]
 
 export default function Home() {
@@ -120,6 +130,18 @@ export default function Home() {
           />
         ))}
       </ProductSection>
+
+      {/* Showcase Section */}
+      <ShowcaseSection
+        title="Crafting Elegance and style"
+        subtitle="We set a high production standard that is constantly focused on our customers' satisfaction."
+        speed="normal"
+        className="bg-gray-50"
+      >
+        {showcaseItems.map((item) => (
+          <ShowcaseCard key={item.id} imageUrl={item.imageUrl} altText={item.altText} />
+        ))}
+      </ShowcaseSection>
     </main>
   )
 }
