@@ -31,7 +31,7 @@ export default function HeroSection({ imageUrl, altText = "Hero image", classNam
 
   return (
     <div
-      className={cn("relative w-full", className)}
+      className={cn("relative w-full mb-4", className)}
       style={{
         height: windowHeight ? `${windowHeight * 1.2}px` : "120vh",
       }}
