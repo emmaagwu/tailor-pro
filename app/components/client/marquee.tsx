@@ -37,7 +37,7 @@ export default function Marquee({
     ))
 
   return (
-    <div className={cn("overflow-hidden whitespace-nowrap py-4 font-medium", className)} style={{ backgroundColor }}>
+    <div className={cn("fixed top-20 left-0 right-0 z-40 overflow-hidden whitespace-nowrap py-4 font-medium", className)} style={{ backgroundColor }}>
       <div
         ref={containerRef}
         className="inline-block"
