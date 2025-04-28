@@ -29,16 +29,16 @@ export default function ShowcaseScroll({
   return (
     <div className={cn("relative w-full overflow-hidden", className)}>
       <div className="flex w-full">
-        {/* First set of items */}
+        {/* First set of items - using grid layout instead of flex for better spacing control */}
         <div
-          className="flex min-w-full shrink-0 animate-scroll space-x-3 sm:space-x-4 md:space-x-4 lg:space-x-3"
+          className="grid min-w-full shrink-0 animate-scroll auto-cols-[75%] sm:auto-cols-[42%] md:auto-cols-[31%] lg:auto-cols-[24.25%] grid-flow-col gap-4"
           style={{
             animationDuration: speedMap[speed],
             animationDirection: reverse ? "reverse" : "normal",
           }}
         >
           {childrenArray.map((child, index) => (
-            <div key={`first-${index}`} className="flex-shrink-0 w-[75%] sm:w-[42%] md:w-[31%] lg:w-[24.25%]">
+            <div key={`first-${index}`} className="w-full">
               {child}
             </div>
           ))}
@@ -46,14 +46,14 @@ export default function ShowcaseScroll({
 
         {/* Duplicate set for seamless scrolling */}
         <div
-          className="flex min-w-full shrink-0 animate-scroll space-x-3 sm:space-x-4 md:space-x-4 lg:space-x-3"
+          className="grid min-w-full shrink-0 animate-scroll auto-cols-[75%] sm:auto-cols-[42%] md:auto-cols-[31%] lg:auto-cols-[24.25%] grid-flow-col gap-4"
           style={{
             animationDuration: speedMap[speed],
             animationDirection: reverse ? "reverse" : "normal",
           }}
         >
           {childrenArray.map((child, index) => (
-            <div key={`second-${index}`} className="flex-shrink-0 w-[75%] sm:w-[42%] md:w-[31%] lg:w-[24.25%]">
+            <div key={`second-${index}`} className="w-full">
               {child}
             </div>
           ))}

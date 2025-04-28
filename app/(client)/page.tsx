@@ -28,6 +28,7 @@ import HeroSection from '../components/client/hero-section'
 import ProductSection from '../components/client/product-section/product-section'
 import WearDisplay from '../components/client/product-section/wear-display'
 import { ShowcaseSection, ShowcaseCard } from "../components/client/showcase-section"
+import { LatestWearsSection, LatestWearCard } from "../components/client/latest-wears-section"
 
 // Sample product data
 const kaftanProducts = [
@@ -64,6 +65,23 @@ const showcaseItems = [
   { id: 3, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161", altText: "Green fabric detail" },
   { id: 4, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161", altText: "Yellow fabric detail" },
   { id: 5, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161", altText: "Purple fabric detail" },
+]
+
+
+// Latest wears data
+const latestWears = [
+  {
+    id: "white-kaftan-001",
+    imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
+    altText: "White traditional kaftan",
+    overlayText: "PREMIUM KAFTAN",
+  },
+  {
+    id: "green-agbada-002",
+    imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
+    altText: "Green traditional agbada",
+    overlayText: "LUXURY AGBADA",
+  },
 ]
 
 export default function Home() {
@@ -130,6 +148,28 @@ export default function Home() {
           />
         ))}
       </ProductSection>
+
+      {/* Latest Wears Section */}
+     {/* Latest Wears Section */}
+      <LatestWearsSection
+        title="Latest Arrivals"
+        subtitle="Discover our newest collection of premium tailored clothing"
+        minHeight="min-h-[70vh]"
+      >
+        {latestWears.slice(0, 2).map((item) => (
+          <LatestWearCard
+            key={item.id}
+            imageUrl={item.imageUrl}
+            altText={item.altText}
+            productId={item.id}
+            priority={true}
+            overlayText={item.overlayText}
+            overlayPosition="bottom"
+            overlayTextSize="2xl"
+          />
+        ))}
+      </LatestWearsSection>
+
 
       {/* Showcase Section */}
       <ShowcaseSection
