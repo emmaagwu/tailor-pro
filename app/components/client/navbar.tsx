@@ -1,9 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { ChevronDown, Heart, Menu, ShirtIcon, Shirt, X } from "lucide-react"
-import { useWishlist } from "../../context/wishlist-context"
+import { useWishlist } from "@/app/context/wishlist-context"
 import WishlistDropdown from "./wishlist-dropdown"
 import { cn } from "@/lib/utils"
 
@@ -45,11 +46,38 @@ const categoryItems = [
 ]
 
 export default function Navbar() {
+  const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCategoryOpen, setIsCategoryOpen] = useState(false)
   const [isWishlistOpen, setIsWishlistOpen] = useState(false)
-  const [activePage, setActivePage] = useState("HOME") // Default active page
+  const [activePage, setActivePage] = useState("")
   const { wishlistItems } = useWishlist()
+
+  // Set active page based on current pathname
+  useEffect(() => {
+    if (pathname === "/") {
+      setActivePage("HOME")
+    } else if (pathname.startsWith("/about")) {
+      setActivePage("ABOUT")
+    } else if (pathname.startsWith("/contact")) {
+      setActivePage("CONTACT")
+    } else if (pathname.startsWith("/faq")) {
+      setActivePage("FAQ")
+    } else if (pathname.startsWith("/category/")) {
+      setActivePage("CATEGORY")
+
+      // Check if we're on a specific category page
+      const categoryPath = pathname.split("/")[2]
+      const categoryName = categoryPath.charAt(0).toUpperCase() + categoryPath.slice(1)
+
+      // Find if this is one of our category items
+      const matchedCategory = categoryItems.find((item) => item.name.toLowerCase() === categoryName.toLowerCase())
+
+      if (matchedCategory) {
+        // We could set a subcategory active state here if needed
+      }
+    }
+  }, [pathname])
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -92,7 +120,6 @@ export default function Navbar() {
                     activePage === item.name ? "underline" : "",
                   )}
                   onClick={() => {
-                    setActivePage(item.name)
                     toggleCategory()
                   }}
                   onMouseEnter={() => setIsCategoryOpen(true)}
@@ -107,7 +134,6 @@ export default function Navbar() {
                     "text-[#5D4037] font-medium transition-all hover:underline",
                     activePage === item.name ? "underline" : "",
                   )}
-                  onClick={() => setActivePage(item.name)}
                 >
                   {item.name}
                 </Link>
@@ -127,7 +153,6 @@ export default function Navbar() {
                         className="flex items-start gap-3 rounded-md p-2 transition-all hover:bg-gray-50"
                         onClick={() => {
                           setIsCategoryOpen(false)
-                          setActivePage(category.name)
                         }}
                       >
                         <div className="mt-1 text-[#5D4037]">{category.icon}</div>
@@ -187,7 +212,6 @@ export default function Navbar() {
                         activePage === item.name ? "underline" : "",
                       )}
                       onClick={() => {
-                        setActivePage(item.name)
                         toggleCategory()
                       }}
                     >
@@ -202,7 +226,6 @@ export default function Navbar() {
                         activePage === item.name ? "underline" : "",
                       )}
                       onClick={() => {
-                        setActivePage(item.name)
                         setIsMenuOpen(false)
                       }}
                     >

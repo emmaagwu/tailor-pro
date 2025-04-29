@@ -4,35 +4,15 @@ import WearDisplay from '../components/client/product-section/wear-display'
 import { ShowcaseSection, ShowcaseCard } from "../components/client/showcase-section"
 import { LatestWearsSection, LatestWearCard } from "../components/client/latest-wears-section"
 import { Footer } from "../components/client/footer"
+import { getProductsByCategory } from "@/lib/product"
 
 
 // Sample product data
-const kaftanProducts = [
-  { id: "KF001", code: "KF001", price: 129.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "KF002", code: "KF002", price: 149.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "KF003", code: "KF003", price: 139.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "KF004", code: "KF003", price: 139.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-]
-
-const agbadaProducts = [
-  { id: "AG001", code: "AG001", price: 199.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "AG002", code: "AG002", price: 219.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "AG003", code: "AG003", price: 189.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "AG004", code: "AG003", price: 189.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-]
-
-const suitProducts = [
-  { id: "ST001", code: "ST001", price: 299.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "ST002", code: "ST002", price: 349.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "ST003", code: "ST003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "ST004", code: "ST003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-]
-const shirtProducts = [
-  { id: "SH001", code: "SH001", price: 299.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "SH002", code: "SH002", price: 349.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "SH003", code: "SH003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: "SH004", code: "SH003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-]
+// Get products by category
+const kaftanProducts = getProductsByCategory("kaftan")
+const agbadaProducts = getProductsByCategory("agbada")
+const suitProducts = getProductsByCategory("suit")
+const shirtProducts = getProductsByCategory("shirt")
 
 
 const showcaseItems = [
@@ -45,20 +25,8 @@ const showcaseItems = [
 
 
 // Latest wears data
-const latestWears = [
-  {
-    id: "white-kaftan-001",
-    imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
-    altText: "White traditional kaftan",
-    overlayText: "PREMIUM KAFTAN",
-  },
-  {
-    id: "green-agbada-002",
-    imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
-    altText: "Green traditional agbada",
-    overlayText: "LUXURY AGBADA",
-  },
-]
+const featuredKaftan = kaftanProducts[0]
+const featuredAgbada = agbadaProducts[0]
 
 export default function Home() {
   return (
@@ -70,35 +38,30 @@ export default function Home() {
 
       {/* Kaftan Section */}
       <ProductSection title="Premium Kaftans" seeMoreText="See More Kaftans" seeMoreHref="/category/kaftan">
-        {kaftanProducts.map((product) => (
-          <WearDisplay
-            key={product.id}
-            id={product.id}
-            imageUrl={product.imageUrl}
-            code={product.code}
-            price={product.price}
-            altText={`Kaftan ${product.code}`}
-          />
-        ))}
+          {kaftanProducts.map((product) => (
+            <WearDisplay
+              key={product.id}
+              id={product.id}
+              imageUrl={product.images[0]}
+              code={product.code}
+              price={product.price}
+              altText={product.name}
+            />
+          ))}
       </ProductSection>
 
       {/* Agbada Section */}
-      <ProductSection
-        title="Elegant Agbadas"
-        seeMoreText="See More Agbadas"
-        seeMoreHref="/category/agbada"
-        className="bg-gray-50"
-      >
-        {agbadaProducts.map((product) => (
-          <WearDisplay
-            key={product.id}
-            id={product.id}
-            imageUrl={product.imageUrl}
-            code={product.code}
-            price={product.price}
-            altText={`Agbada ${product.code}`}
-          />
-        ))}
+      <ProductSection title="Luxury Agbada" seeMoreText="See    More Agbada" seeMoreHref="/category/agbada">
+          {agbadaProducts.map((product) => (
+            <WearDisplay
+              key={product.id}
+              id={product.id}
+              imageUrl={product.images[0]}
+              code={product.code}
+              price={product.price}
+              altText={product.name}
+            />
+          ))}
       </ProductSection>
 
       {/* Suit Section */}
@@ -107,7 +70,7 @@ export default function Home() {
           <WearDisplay
             key={product.id}
             id={product.id}
-            imageUrl={product.imageUrl}
+            imageUrl={product.images[0]}
             code={product.code}
             price={product.price}
             altText={`Suit ${product.code}`}
@@ -121,7 +84,7 @@ export default function Home() {
           <WearDisplay
             key={product.id}
             id={product.id}
-            imageUrl={product.imageUrl}
+            imageUrl={product.images[0]}
             code={product.code}
             price={product.price}
             altText={`Shirt ${product.code}`}
@@ -136,7 +99,7 @@ export default function Home() {
         subtitle="Discover our newest collection of premium tailored clothing"
         minHeight="min-h-[70vh]"
       >
-        {latestWears.slice(0, 2).map((item) => (
+        {/* {latestWears.slice(0, 2).map((item) => (
           <LatestWearCard
             key={item.id}
             imageUrl={item.imageUrl}
@@ -147,7 +110,26 @@ export default function Home() {
             overlayPosition="bottom"
             overlayTextSize="2xl"
           />
-        ))}
+        ))} */}
+
+          <LatestWearCard
+            imageUrl={featuredKaftan.images[0]}
+            altText={featuredKaftan.name}
+            productId={featuredKaftan.id}
+            priority={true}
+            overlayText="PREMIUM KAFTAN"
+            overlayPosition="bottom"
+            overlayTextSize="2xl"
+          />
+          <LatestWearCard
+            imageUrl={featuredAgbada.images[0]}
+            altText={featuredAgbada.name}
+            productId={featuredAgbada.id}
+            priority={true}
+            overlayText="LUXURY AGBADA"
+            overlayPosition="bottom"
+            overlayTextSize="2xl"
+          />
       </LatestWearsSection>
 
 
