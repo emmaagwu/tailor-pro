@@ -1,6 +1,6 @@
 import Marquee from "../components/client/marquee";
 import Navbar from "../components/client/navbar";
-import { WishlistProvider } from "../context/wishlist-context"
+
 
 
 export default function ClientLayout({
@@ -9,7 +9,6 @@ export default function ClientLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <WishlistProvider>
       <div>
         <Navbar />
         <Marquee
@@ -18,6 +17,5 @@ export default function ClientLayout({
         />
         {children}
       </div>
-    </WishlistProvider>
   );
 }

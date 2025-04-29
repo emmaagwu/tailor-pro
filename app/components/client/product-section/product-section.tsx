@@ -11,18 +11,26 @@ interface ProductSectionProps {
   seeMoreText: string
   seeMoreHref: string
   className?: string
+  hideTitle?: boolean
   children: React.ReactNode
 }
 
-export default function ProductSection({ title, seeMoreText, seeMoreHref, className, children }: ProductSectionProps) {
+export default function ProductSection({
+  title,
+  seeMoreText,
+  seeMoreHref,
+  className,
+  hideTitle = false,
+  children,
+}: ProductSectionProps) {
   return (
     <section className={cn("min-h-[90vh] flex flex-col justify-center py-12 md:py-16", className)}>
       <div className="mx-auto px-3 sm:px-4 lg:px-5 w-full flex-1 flex flex-col justify-center">
-        <SectionTitle title={title} />
+        {!hideTitle && <SectionTitle title={title} />}
         <div className="flex-1 flex items-center">
           <WearGrid>{children}</WearGrid>
         </div>
-        <SeeMoreButton text={seeMoreText} href={seeMoreHref} />
+        {seeMoreText && seeMoreHref && <SeeMoreButton text={seeMoreText} href={seeMoreHref} />}
       </div>
 
       {/* Scoped styles for container */}

@@ -23,8 +23,9 @@ const WishlistContext = createContext<WishlistContextType | undefined>(undefined
 export function WishlistProvider({ children }: { children: React.ReactNode }) {
   const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([])
   const [totalPrice, setTotalPrice] = useState(0)
+  const [isInitialized, setIsInitialized] = useState(false)
 
-  // Load wishlist from localStorage on initial render
+  // Load wishlist from localStorage on initial render (client-side only)
   useEffect(() => {
     const savedWishlist = localStorage.getItem("wishlist")
     if (savedWishlist) {
@@ -35,16 +36,20 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
         console.error("Failed to parse wishlist from localStorage:", error)
       }
     }
+    setIsInitialized(true)
   }, [])
 
   // Save wishlist to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlistItems))
+    // Only save after initial load to prevent overwriting with empty array
+    if (isInitialized) {
+      localStorage.setItem("wishlist", JSON.stringify(wishlistItems))
+    }
 
     // Calculate total price whenever wishlist changes
     const newTotal = wishlistItems.reduce((sum, item) => sum + item.price, 0)
     setTotalPrice(newTotal)
-  }, [wishlistItems])
+  }, [wishlistItems, isInitialized])
 
   // Add item to wishlist if not already present
   const addToWishlist = (item: WishlistItem) => {

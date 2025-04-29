@@ -1,11 +1,11 @@
 import Link from "next/link"
 import Navbar from "@/app/components/client/navbar"
 import { Footer } from "@/app/components/client/footer"
-import { WishlistProvider } from "@/app/context/wishlist-context"
+
 
 export default function NotFound() {
   return (
-    <WishlistProvider>
+    <>
       <Navbar />
       <main className="flex min-h-screen flex-col items-center justify-center px-4 py-24 text-center">
         <h1 className="mb-4 text-4xl font-bold text-[#5D4037]">404</h1>
@@ -21,6 +21,6 @@ export default function NotFound() {
         </Link>
       </main>
       <Footer />
-    </WishlistProvider>
+    </>
   )
 }

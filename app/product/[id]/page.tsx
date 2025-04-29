@@ -3,7 +3,6 @@ import Navbar from "@/app/components/client/navbar"
 import { Footer } from "@/app/components/client/footer"
 import Marquee from "@/app/components/client/marquee"
 import ProductDetail from "@/app/components/client/product-detail/product-detail"
-import { WishlistProvider } from "@/app/context/wishlist-context"
 import { getProductById } from "@/lib/product"
 
 interface ProductPageProps {
@@ -12,8 +11,8 @@ interface ProductPageProps {
   }
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
-  const { id } = params
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { id } = await params
   const product = getProductById(id)
 
   if (!product) {
@@ -21,7 +20,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
 
   return (
-    <WishlistProvider>
+    <>
       <Navbar />
       <Marquee
         text="FREE SHIPPING ON ALL ORDERS OVER $150 • NEW COLLECTION AVAILABLE NOW • USE CODE 'GRANDEUR10' FOR 10% OFF"
@@ -31,6 +30,6 @@ export default function ProductPage({ params }: ProductPageProps) {
         <ProductDetail product={product} />
       </main>
       <Footer />
-    </WishlistProvider>
+    </>
   )
 }
