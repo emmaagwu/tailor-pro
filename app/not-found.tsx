@@ -11,8 +11,9 @@ export default function NotFound() {
         <h1 className="mb-4 text-4xl font-bold text-[#5D4037]">404</h1>
         <h2 className="mb-6 text-2xl font-semibold">Product Not Found</h2>
         <p className="mb-8 max-w-md text-gray-600">
-          We couldn't find the product you're looking for. It might have been removed or the URL might be incorrect.
+          We couldn&#39;t find the product you&#39;re looking for. It might have been removed or the URL might be incorrect.
         </p>
+
         <Link
           href="/"
           className="rounded-full bg-[#5D4037] px-6 py-3 text-white transition-colors hover:bg-[#5D4037]/90"
