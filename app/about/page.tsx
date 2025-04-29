@@ -23,10 +23,10 @@ export default function AboutPage() {
 
         {/* Mission Statement */}
         <div className="mx-auto max-w-3xl px-4 py-16 text-center md:py-20">
-          <p className="text-lg text-gray-700 md:text-xl">
-            We believe there is nothing better than a tailor-made outfit, and our mission is to give that to everyone
-            who wants it. We've been crafting native wears for Nigerian men for over 10 years.
-          </p>
+        <p className="text-lg text-gray-700 md:text-xl">
+          We believe there is nothing better than a tailor-made outfit, and our mission is to give that to everyone
+          who wants it. We&rsquo;ve been crafting native wears for Nigerian men for over 10 years.
+        </p>
         </div>
 
         {/* Content Sections */}
