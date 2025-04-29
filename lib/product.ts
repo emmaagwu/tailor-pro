@@ -253,7 +253,7 @@ const products: Product[] = [
     material: "Premium cotton with pleated front",
     features: ["Pleated front", "French cuffs", "Wing collar", "Formal design"],
     images: [
-      "/placeholder.svg?height=800&width=600&text=Black+Shirt+Fronthttps://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
+      "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
       "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
       "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
     ],
