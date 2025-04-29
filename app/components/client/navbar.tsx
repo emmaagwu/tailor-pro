@@ -3,6 +3,8 @@
 import { useState } from "react"
 import Link from "next/link"
 import { ChevronDown, Heart, Menu, ShirtIcon, Shirt, X } from "lucide-react"
+import { useWishlist } from "../../context/wishlist-context"
+import WishlistDropdown from "./wishlist-dropdown"
 import { cn } from "@/lib/utils"
 
 // Updated navigation items
@@ -45,15 +47,24 @@ const categoryItems = [
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCategoryOpen, setIsCategoryOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
   const [activePage, setActivePage] = useState("HOME") // Default active page
+  const { wishlistItems } = useWishlist()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
     if (isCategoryOpen) setIsCategoryOpen(false)
+    if (isWishlistOpen) setIsWishlistOpen(false)
   }
 
   const toggleCategory = () => {
     setIsCategoryOpen(!isCategoryOpen)
+    if (isWishlistOpen) setIsWishlistOpen(false)
+  }
+
+  const toggleWishlist = () => {
+    setIsWishlistOpen(!isWishlistOpen)
+    if (isCategoryOpen) setIsCategoryOpen(false)
   }
 
   return (
@@ -105,18 +116,18 @@ export default function Navbar() {
               {/* Desktop Category Dropdown */}
               {item.hasDropdown && isCategoryOpen && (
                 <div
-                  className="absolute left-0 top-full z-50 mt-2 rounded-md bg-white p-4 shadow-lg w-[400px]"
+                  className="absolute left-0 top-full z-50 mt-2 w-64 rounded-md bg-white p-4 shadow-lg"
                   onMouseLeave={() => setIsCategoryOpen(false)}
-                >                 
-                  <div className="grid grid-cols-2 gap-4 items-stretch">
+                >
+                  <div className="flex flex-col space-y-4">
                     {categoryItems.map((category) => (
                       <Link
                         key={category.name}
                         href={category.href}
                         className="flex items-start gap-3 rounded-md p-2 transition-all hover:bg-gray-50"
                         onClick={() => {
-                          setIsCategoryOpen(false);
-                          setActivePage(category.name);
+                          setIsCategoryOpen(false)
+                          setActivePage(category.name)
                         }}
                       >
                         <div className="mt-1 text-[#5D4037]">{category.icon}</div>
@@ -144,15 +155,23 @@ export default function Navbar() {
           </button>
 
           {/* Heart Icon - Always at extreme right */}
-          <Link
-            href="/wishlist"
-            className="relative ml-2 flex h-10 w-10 items-center justify-center rounded-full hover:bg-gray-100"
-          >
-            <Heart className="h-5 w-5 text-[#5D4037]" />
-            <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#5D4037] text-xs text-white">
-              1
-            </span>
-          </Link>
+          <div className="relative">
+            <button
+              onClick={toggleWishlist}
+              className="relative ml-2 flex h-10 w-10 items-center justify-center rounded-full hover:bg-gray-100"
+              aria-label="Open wishlist"
+            >
+              <Heart className="h-5 w-5 text-[#5D4037]" />
+              {wishlistItems.length > 0 && (
+                <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#5D4037] text-xs text-white">
+                  {wishlistItems.length}
+                </span>
+              )}
+            </button>
+
+            {/* Wishlist Dropdown */}
+            <WishlistDropdown isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} />
+          </div>
         </div>
 
         {/* Mobile Navigation */}

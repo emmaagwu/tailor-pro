@@ -1,29 +1,3 @@
-// import React from 'react'
-// import HeroSection from '../components/client/hero-section'
-// import AgbadaSection from '../components/client/agbada-section'
-// import KaftanSection from '../components/client/kaftan-section'
-// import SuitSection from '../components/client/suit-section'
-// import ShirtSection from '../components/client/shirt-section'
-
-// const Home = () => {
-//   return (
-//     <div className='mt-13'>
-//       <HeroSection
-//         imageUrl='https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161'
-//         altText='Elegant tailored clothing collection'
-//       />
-//       <AgbadaSection />
-//       <KaftanSection />
-//       <SuitSection />
-//       <ShirtSection />
-//     </div>
-//   )
-// }
-
-// export default Home
-
-
-
 import HeroSection from '../components/client/hero-section'
 import ProductSection from '../components/client/product-section/product-section'
 import WearDisplay from '../components/client/product-section/wear-display'
@@ -31,32 +5,33 @@ import { ShowcaseSection, ShowcaseCard } from "../components/client/showcase-sec
 import { LatestWearsSection, LatestWearCard } from "../components/client/latest-wears-section"
 import { Footer } from "../components/client/footer"
 
+
 // Sample product data
 const kaftanProducts = [
-  { id: 1, code: "KF001", price: 129.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 2, code: "KF002", price: 149.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 3, code: "KF003", price: 139.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 4, code: "KF003", price: 139.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "KF001", code: "KF001", price: 129.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "KF002", code: "KF002", price: 149.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "KF003", code: "KF003", price: 139.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "KF004", code: "KF003", price: 139.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
 ]
 
 const agbadaProducts = [
-  { id: 1, code: "AG001", price: 199.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 2, code: "AG002", price: 219.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 3, code: "AG003", price: 189.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 4, code: "AG003", price: 189.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "AG001", code: "AG001", price: 199.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "AG002", code: "AG002", price: 219.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "AG003", code: "AG003", price: 189.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "AG004", code: "AG003", price: 189.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
 ]
 
 const suitProducts = [
-  { id: 1, code: "ST001", price: 299.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 2, code: "ST002", price: 349.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 3, code: "ST003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 4, code: "ST003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "ST001", code: "ST001", price: 299.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "ST002", code: "ST002", price: 349.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "ST003", code: "ST003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "ST004", code: "ST003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
 ]
 const shirtProducts = [
-  { id: 1, code: "SH001", price: 299.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 2, code: "SH002", price: 349.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 3, code: "SH003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
-  { id: 4, code: "SH003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "SH001", code: "SH001", price: 299.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "SH002", code: "SH002", price: 349.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "SH003", code: "SH003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
+  { id: "SH004", code: "SH003", price: 329.99, imageUrl: "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161" },
 ]
 
 
@@ -90,7 +65,7 @@ export default function Home() {
     <main className='mt-13'>
       <HeroSection
         imageUrl='https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161'
-      altText='Elegant tailored clothing collection'
+        altText='Elegant tailored clothing collection'
       />
 
       {/* Kaftan Section */}
@@ -98,6 +73,7 @@ export default function Home() {
         {kaftanProducts.map((product) => (
           <WearDisplay
             key={product.id}
+            id={product.id}
             imageUrl={product.imageUrl}
             code={product.code}
             price={product.price}
@@ -116,6 +92,7 @@ export default function Home() {
         {agbadaProducts.map((product) => (
           <WearDisplay
             key={product.id}
+            id={product.id}
             imageUrl={product.imageUrl}
             code={product.code}
             price={product.price}
@@ -129,6 +106,7 @@ export default function Home() {
         {suitProducts.map((product) => (
           <WearDisplay
             key={product.id}
+            id={product.id}
             imageUrl={product.imageUrl}
             code={product.code}
             price={product.price}
@@ -142,6 +120,7 @@ export default function Home() {
         {shirtProducts.map((product) => (
           <WearDisplay
             key={product.id}
+            id={product.id}
             imageUrl={product.imageUrl}
             code={product.code}
             price={product.price}
@@ -151,7 +130,7 @@ export default function Home() {
       </ProductSection>
 
       {/* Latest Wears Section */}
-     {/* Latest Wears Section */}
+    {/* Latest Wears Section */}
       <LatestWearsSection
         title="Latest Arrivals"
         subtitle="Discover our newest collection of premium tailored clothing"

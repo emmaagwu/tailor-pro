@@ -1,26 +1,35 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Heart, MessageCircle } from "lucide-react"
+import { useWishlist } from "../../../context/wishlist-context"
 import { cn } from "@/lib/utils"
 
 interface WearDetailsProps {
+  id: string
   code: string
   price: number
+  imageUrl: string
   className?: string
-  onFavoriteToggle?: (isFavorite: boolean) => void
 }
 
-export default function WearDetails({ code, price, className, onFavoriteToggle }: WearDetailsProps) {
+export default function WearDetails({ id, code, price, imageUrl, className }: WearDetailsProps) {
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
   const [isFavorite, setIsFavorite] = useState(false)
 
+  // Sync component state with wishlist context
+  useEffect(() => {
+    setIsFavorite(isInWishlist(id))
+  }, [isInWishlist, id])
+
   const handleFavoriteClick = () => {
-    const newState = !isFavorite
-    setIsFavorite(newState)
-    if (onFavoriteToggle) {
-      onFavoriteToggle(newState)
+    if (isFavorite) {
+      removeFromWishlist(id)
+    } else {
+      addToWishlist({ id, code, price, imageUrl })
     }
+    setIsFavorite(!isFavorite)
   }
 
   return (
