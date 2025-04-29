@@ -7,9 +7,9 @@ import ProductSection from "@/app/components/client/product-section/product-sect
 import WearDisplay from "@/app/components/client/product-section/wear-display"
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     category: string
-  }
+  }>
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
