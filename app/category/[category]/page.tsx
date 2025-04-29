@@ -36,7 +36,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 lg:px-8">
           <h1 className="mb-8 text-center text-3xl font-bold text-[#5D4037] md:text-4xl">{categoryTitle}</h1>
 
-          <ProductSection title="" seeMoreText="" seeMoreHref="" hideTitle={true}>
+          {/* Using grid layout for category pages */}
+          <ProductSection
+            title=""
+            seeMoreText=""
+            seeMoreHref=""
+            hideTitle={true}
+            gridLayout="grid"
+            className="min-h-0 py-0"
+          >
             {products.map((product) => (
               <WearDisplay
                 key={product.id}

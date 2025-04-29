@@ -12,6 +12,7 @@ interface ProductSectionProps {
   seeMoreHref: string
   className?: string
   hideTitle?: boolean
+  gridLayout?: "horizontal" | "grid" // New prop to control grid layout
   children: React.ReactNode
 }
 
@@ -21,6 +22,7 @@ export default function ProductSection({
   seeMoreHref,
   className,
   hideTitle = false,
+  gridLayout = "horizontal", // Default to horizontal for home page
   children,
 }: ProductSectionProps) {
   return (
@@ -28,7 +30,7 @@ export default function ProductSection({
       <div className="mx-auto px-3 sm:px-4 lg:px-5 w-full flex-1 flex flex-col justify-center">
         {!hideTitle && <SectionTitle title={title} />}
         <div className="flex-1 flex items-center">
-          <WearGrid>{children}</WearGrid>
+          <WearGrid layout={gridLayout}>{children}</WearGrid>
         </div>
         {seeMoreText && seeMoreHref && <SeeMoreButton text={seeMoreText} href={seeMoreHref} />}
       </div>
