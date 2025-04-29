@@ -29,6 +29,7 @@ import ProductSection from '../components/client/product-section/product-section
 import WearDisplay from '../components/client/product-section/wear-display'
 import { ShowcaseSection, ShowcaseCard } from "../components/client/showcase-section"
 import { LatestWearsSection, LatestWearCard } from "../components/client/latest-wears-section"
+import { Footer } from "../components/client/footer"
 
 // Sample product data
 const kaftanProducts = [
@@ -182,6 +183,8 @@ export default function Home() {
           <ShowcaseCard key={item.id} imageUrl={item.imageUrl} altText={item.altText} />
         ))}
       </ShowcaseSection>
+      {/* Footer */}
+      <Footer />
     </main>
   )
 }
