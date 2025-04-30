@@ -18,7 +18,7 @@ export default function AboutPage() {
         <HeroBanner
           title="About Us"
           description="Founded in 2017 and based in Abeokuta, Nigeria, Grandeur Tailors is a custom tailor shop with a strong commitment and dedication to excellence."
-          bgColor="#8D6E63"
+          bgColor="#683D0D"
         />
 
         {/* Mission Statement */}

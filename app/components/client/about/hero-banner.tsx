@@ -12,7 +12,7 @@ export default function HeroBanner({
   title,
   description,
   className,
-  bgColor = "#8D6E63",
+  bgColor = "#683D0D",
   textColor = "white",
 }: HeroBannerProps) {
   return (
