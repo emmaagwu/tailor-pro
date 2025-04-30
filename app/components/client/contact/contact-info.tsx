@@ -13,8 +13,7 @@ export default function ContactInfo({ className }: ContactInfoProps) {
         <h1 className="mb-6 text-4xl font-bold text-[#333333] md:text-5xl">Get in touch</h1>
 
         <p className="mb-8 text-lg text-gray-700">
-          Have a question? Our team is always ready to help. Feel free reach us anytime, we'll be glad to have you in
-          our atelier.
+          Have a question? Our team is always ready to help. Feel free reach us anytime, we&apos;ll be glad to have you in our atelier.
         </p>
 
         {/* Email */}
