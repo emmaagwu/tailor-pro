@@ -32,6 +32,29 @@ export default function WishlistDropdown({ isOpen, onClose }: WishlistDropdownPr
     }
   }, [isOpen, onClose])
 
+
+  const handleWishlistWhatsAppClick = () => {
+    const phoneNumber = "2348131333446";
+
+    if (wishlistItems.length === 0) return;
+
+    const messageLines = wishlistItems.map((item, index) => (
+      `🧵 *Item ${index + 1}*\n` +
+      `Name: ${item.id || "N/A"}\n` +
+      `Code: ${item.code}\n` +
+      `Price: $${item.price.toFixed(2)}\n`
+    ));
+
+    const message = `Hello! I'm interested in the following items from my wishlist:\n\n${messageLines.join("\n")}\n` +
+                    `🧾 *Total Price:* $${totalPrice.toFixed(2)}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const waLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    window.open(waLink, "_blank");
+  };
+
+
   if (!isOpen) return null
 
   return (
@@ -65,13 +88,13 @@ export default function WishlistDropdown({ isOpen, onClose }: WishlistDropdownPr
               <span className="text-lg font-bold text-[#5D4037]">${totalPrice.toFixed(2)}</span>
             </div>
 
-            <Link
-              href="/chat"
+            <button
+              onClick={handleWishlistWhatsAppClick}
               className="flex w-full items-center justify-center space-x-2 rounded-full bg-[#5D4037] px-4 py-2 text-white transition-colors hover:bg-[#5D4037]/90"
             >
               <MessageCircle className="h-4 w-4" />
               <span>Chat with Tailor</span>
-            </Link>
+            </button>
           </div>
         </>
       )}

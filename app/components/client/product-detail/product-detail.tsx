@@ -29,6 +29,20 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     setIsFavorite(!isFavorite)
   }
 
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "2348131333446"; // No '+' sign
+
+    const message = `Hello, I am interested in this item:\n\n` +
+                    `🧥 *Name:* ${product.name}\n` +
+                    `🧾 *Code:* ${product.code}\n` +
+                    `💰 *Price:* $${product.price.toFixed(2)}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const waLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    window.location.href = waLink;
+  };
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 lg:px-8">
       <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
@@ -96,7 +110,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             {/* Action Buttons */}
             <div className="mt-8 flex flex-col space-y-4">
               <button
-                onClick={() => (window.location.href = `/chat?product=${product.code}`)}
+                // onClick={() => (window.location.href = `/chat?product=${product.code}`)}
+                onClick={handleWhatsAppClick}
                 className="flex w-full items-center justify-center space-x-2 rounded-full bg-[#5D4037] px-6 py-3 text-white transition-colors hover:bg-[#5D4037]/90"
               >
                 <MessageCircle className="h-5 w-5" />

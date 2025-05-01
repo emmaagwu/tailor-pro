@@ -32,6 +32,12 @@ export default function WearDetails({ id, code, price, imageUrl, className }: We
     setIsFavorite(!isFavorite)
   }
 
+  // Format chat message
+  const message = encodeURIComponent(
+    `Hello, I'm interested in this item:\n\nCode: ${code}\nPrice: $${price.toFixed(2)}`
+  )
+  const whatsappLink = `https://wa.me/2348131333446?text=${message}`
+
   return (
     <div className={cn("mt-3 flex flex-col space-y-2", className)}>
       <div className="flex items-center justify-between">
@@ -53,8 +59,10 @@ export default function WearDetails({ id, code, price, imageUrl, className }: We
       <div className="flex items-center justify-between">
         <span className="text-lg font-bold text-[#5D4037]">${price.toFixed(2)}</span>
         <Link
-          href={`/chat?product=${code}`}
+          href={whatsappLink}
           className="flex items-center space-x-1 text-sm font-medium text-[#A1887F] transition-colors hover:text-[#5D4037]"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <MessageCircle className="h-4 w-4" />
           <span>Chat Tailor</span>
