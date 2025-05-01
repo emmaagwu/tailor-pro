@@ -53,9 +53,9 @@ export const faqData: FAQCategory[] = [
         question: "What if I&apos;m in Abuja or in the North, Can you come?",
         answer: (
           <p>
-            For clients in Abuja or other northern states, we currently don't offer in-person measurement services.
+            For clients in Abuja or other northern states, we currently don&apos;t offer in-person measurement services.
             However, we have a detailed measurement guide and can arrange video calls to ensure accurate measurements.
-            We've successfully served many clients from these regions using our remote measurement process.
+            We&apos;ve successfully served many clients from these regions using our remote measurement process.
           </p>
         ),
       },
@@ -111,7 +111,7 @@ export const faqData: FAQCategory[] = [
         answer: (
           <p>
             When you provide your own fabric for a kaftan, our service charges typically range from ₦15,000 to ₦40,000,
-            depending on the style complexity, embroidery details, and finishing requirements. We'll provide a specific
+            depending on the style complexity, embroidery details, and finishing requirements. We&apos;ll provide a specific
             quote after discussing your design preferences.
           </p>
         ),
