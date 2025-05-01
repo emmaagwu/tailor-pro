@@ -2,7 +2,6 @@
 
 import { useRef, useEffect } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { MessageCircle, X } from "lucide-react"
 import { useWishlist, type WishlistItem as WishlistItemType } from "../../context/wishlist-context"
 
