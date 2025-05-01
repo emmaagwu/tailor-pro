@@ -13,8 +13,8 @@ export default function ContactPage() {
         speed="normal"
       />
 
-      <main className="mx-5 min-h-screen pt-20 md:mb-50 md:mx-70 ">
-        <div className="grid grid-cols-1 md:grid-cols-2">
+      <main className="mx-5 min-h-screen mb-20 pt-20 md:mb-50 md:mx-70">
+        <div className="grid grid-cols-1 md:grid-cols-2 rounded-4xl overflow-hidden">
           {/* Store Image - Left Side */}
           <div className="relative h-[300px] md:h-auto">
             <Image
