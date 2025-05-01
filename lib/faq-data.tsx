@@ -27,7 +27,7 @@ export const faqData: FAQCategory[] = [
         ),
       },
       {
-        question: "How do you cater for my measurements since I'm far away?",
+        question: "How do you cater for my measurements since I&apos;m far away?",
         answer: (
           <>
             <p>We have several options for remote clients:</p>
@@ -50,7 +50,7 @@ export const faqData: FAQCategory[] = [
         ),
       },
       {
-        question: "What if I'm in Abuja or in the North, Can you come?",
+        question: "What if I&apos;m in Abuja or in the North, Can you come?",
         answer: (
           <p>
             For clients in Abuja or other northern states, we currently don't offer in-person measurement services.
@@ -107,7 +107,7 @@ export const faqData: FAQCategory[] = [
         ),
       },
       {
-        question: "What's the price if I bring fabric for kaftan?",
+        question: "What&apos;s the price if I bring fabric for kaftan?",
         answer: (
           <p>
             When you provide your own fabric for a kaftan, our service charges typically range from ₦15,000 to ₦40,000,
