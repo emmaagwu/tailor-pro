@@ -41,7 +41,7 @@ export default function WishlistDropdown({ isOpen, onClose }: WishlistDropdownPr
       `🧵 *Item ${index + 1}*\n` +
       `Name: ${item.id || "N/A"}\n` +
       `Code: ${item.code}\n` +
-      `Price: $${item.price.toFixed(2)}\n`
+      `Price:  ₦${item.price.toFixed(2)}\n`
     ));
 
     const message = `Hello! I'm interested in the following items from my wishlist:\n\n${messageLines.join("\n")}\n` +

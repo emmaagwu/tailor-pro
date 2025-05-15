@@ -34,7 +34,7 @@ export default function WearDetails({ id, code, price, imageUrl, className }: We
 
   // Format chat message
   const message = encodeURIComponent(
-    `Hello, I'm interested in this item:\n\nCode: ${code}\nPrice: $${price.toFixed(2)}`
+    `Hello, I'm interested in this item:\n\nCode: ${code}\nPrice: ₦${price.toFixed(2)}`
   )
   const whatsappLink = `https://wa.me/2348131333446?text=${message}`
 

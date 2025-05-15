@@ -222,7 +222,8 @@ const products: Product[] = [
     material: "100% Egyptian cotton",
     features: ["French cuffs", "Mother of pearl buttons", "Spread collar", "Tailored fit"],
     images: [
-      "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
+      // "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
+      "/images/shirt1.jpg",
       "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
       "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
     ],
@@ -238,7 +239,8 @@ const products: Product[] = [
     material: "Premium cotton with textured weave",
     features: ["Regular cuffs", "Semi-spread collar", "Slim fit", "Non-iron finish"],
     images: [
-      "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
+      // "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
+      "/images/shirt2.jpg",
       "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
     ],
     rating: 4,
@@ -253,7 +255,8 @@ const products: Product[] = [
     material: "Premium cotton with pleated front",
     features: ["Pleated front", "French cuffs", "Wing collar", "Formal design"],
     images: [
-      "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
+      // "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
+      "/images/shirt3.jpg",
       "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
       "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
     ],
@@ -269,7 +272,8 @@ const products: Product[] = [
     material: "Soft cotton with check pattern",
     features: ["Button-down collar", "Single pocket", "Regular fit", "Versatile design"],
     images: [
-      "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
+      // "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
+      "/images/shirt4.jpg",
       "https://ik.imagekit.io/n34nw5zbn/tailor-hero.jpg?updatedAt=1745710802161",
     ],
     rating: 4,

@@ -35,7 +35,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     const message = `Hello, I am interested in this item:\n\n` +
                     `🧥 *Name:* ${product.name}\n` +
                     `🧾 *Code:* ${product.code}\n` +
-                    `💰 *Price:* $${product.price.toFixed(2)}`;
+                    `💰 *Price:* ₦${product.price.toFixed(2)}`;
 
     const encodedMessage = encodeURIComponent(message);
     const waLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
