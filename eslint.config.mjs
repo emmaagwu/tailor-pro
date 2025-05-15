@@ -29,30 +29,18 @@ const compat = new FlatCompat({
 
 /** @type {import("eslint").Linter.FlatConfig[]} */
 const eslintConfig = [
-  // Core Next.js + TypeScript rules
+  // ✅ Base rules
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
-  // ✅ Ignore Prisma generated files
+  // ✅ Ignore Prisma and other generated folders
   {
-    files: [
-      ".prisma/**",
-      "prisma/generated/**",
-      "node_modules/@prisma/client/**",
+    ignores: [
+      "**/.next/**",
+      "**/node_modules/**",
+      "**/prisma/generated/**",
+      "**/.prisma/**",
+      "**/@prisma/client/**",
     ],
-    rules: {
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unused-vars": "off",
-      "@typescript-eslint/ban-types": "off",
-    },
-  },
-
-  // Optional: ignore all declaration files
-  {
-    files: ["**/*.d.ts"],
-    rules: {
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unused-vars": "off",
-    },
   },
 ];
 
