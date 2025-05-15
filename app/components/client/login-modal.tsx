@@ -95,6 +95,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
         setError(result.error || "Login failed")
       }
     } catch (err) {
+      if (err instanceof Error){
+        console.log("Login error:", err)
+      }
       setError("An unexpected error occurred")
     } finally {
       setLoading(false)

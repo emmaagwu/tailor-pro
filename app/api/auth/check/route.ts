@@ -19,6 +19,11 @@ export async function GET() {
     return NextResponse.json({ authenticated: true })
   } catch (error) {
     // Invalid or expired token
+    if (error instanceof Error){
+      console.error("Token verification error:", error.message)
+    } else {
+      console.error("The error is:", error)
+    }
     return NextResponse.json({ authenticated: false })
   }
 }
