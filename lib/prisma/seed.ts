@@ -1,5 +1,4 @@
 import { prisma } from "./db"
-import bcrypt from "bcryptjs"
 import { hashPassword } from "@/utils/hash"
 
 
