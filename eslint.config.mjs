@@ -40,6 +40,7 @@ const eslintConfig = [
       "**/prisma/generated/**",
       "**/.prisma/**",
       "**/@prisma/client/**",
+      "**/lib/generated/**",
     ],
   },
 ];
