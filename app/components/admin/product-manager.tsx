@@ -321,7 +321,10 @@ export default function ProductManager() {
                     <Upload className="h-4 w-4" />
                   </button>
                 </div>
-                <p className="mt-1 text-xs text-gray-500">For demo purposes, use "/placeholder.svg" or any image URL</p>
+                <p className="mt-1 text-xs text-gray-500">
+                  For demo purposes, use &quot;/placeholder.svg&quot; or any image URL
+                </p>
+
               </div>
 
               <div className="flex justify-end space-x-3 pt-4">
@@ -475,7 +478,7 @@ export default function ProductManager() {
               </div>
               <h3 className="text-lg font-bold text-gray-900">Delete Product</h3>
               <p className="mt-2 text-gray-500">
-                Are you sure you want to delete "{currentProduct.name}"? This action cannot be undone.
+                Are you sure you want to delete &quot;{currentProduct.name}&quot;? This action cannot be undone.
               </p>
             </div>
 

@@ -1,6 +1,5 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { redirect } from "next/navigation"
 import { AdminProvider } from "@/app/context/admin-context"
 import AdminSidebar from "@/app/components/admin/admin-sidebar"
 import AdminHeader from "@/app/components/admin/admin-header"
@@ -11,23 +10,11 @@ export const metadata: Metadata = {
   description: "Admin dashboard for Grandeur Tailors",
 }
 
-// // This is a simple auth check - in a real app, you would use a proper auth system
-// function checkAuth() {
-//   // For demo purposes, we're just returning true
-//   // In a real app, you would check if the user is authenticated
-//   return true
-// }
-
 export default function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  // const isAuthenticated = checkAuth()
-
-  // if (!isAuthenticated) {
-  //   redirect("/admin/login")
-  // }
 
   return (
     <ProtectedRoute>

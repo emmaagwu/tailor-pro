@@ -599,8 +599,9 @@ export default function CustomerManager() {
               </div>
               <h3 className="text-lg font-bold text-gray-900">Delete Customer</h3>
               <p className="mt-2 text-gray-500">
-                Are you sure you want to delete "{currentCustomer.name}"? This action cannot be undone.
+                Are you sure you want to delete &quot;{currentCustomer.name}&quot;? This action cannot be undone.
               </p>
+
             </div>
 
             <div className="flex justify-center space-x-3">
