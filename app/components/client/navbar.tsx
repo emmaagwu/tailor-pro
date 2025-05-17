@@ -225,7 +225,7 @@ export default function Navbar() {
             <>
               {/* Admin Dashboard Button */}
               <Link
-                href="/admin/dashboard"
+                href="/admin"
                 className="hidden md:flex items-center space-x-1 rounded-full border border-[#5D4037] px-3 py-1.5 text-sm font-medium text-[#5D4037] hover:bg-[#5D4037] hover:text-white transition-colors"
               >
                 <UserCircle className="h-4 w-4" />
@@ -289,7 +289,7 @@ export default function Navbar() {
               {isLoggedIn && !loading && (
                 <div className="flex flex-col space-y-2 border-b border-gray-100 pb-4 mb-2">
                 <Link
-                  href="/admin/dashboard"
+                  href="/admin"
                   className="flex items-center w-30 space-x-1 rounded-full border border-[#5D4037] px-3 py-1.5 text-sm font-medium text-[#5D4037] hover:bg-[#5D4037] hover:text-white transition-colors"
                 >
                   <UserCircle className="h-4 w-4" />
