@@ -5,6 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Bell, User, LogOut, ExternalLink } from "lucide-react"
 
+
 export default function AdminHeader() {
   const pathname = usePathname()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -16,6 +17,8 @@ export default function AdminHeader() {
     switch (path) {
       case "admin":
         return "Dashboard"
+      case "categories":
+        return "Category Management"
       case "products":
         return "Product Management"
       case "homepage":

@@ -70,7 +70,7 @@ export default function CustomerManager() {
       measurements: newCustomer.measurements || {},
       selectedWears: newCustomer.selectedWears || [],
       notes: newCustomer.notes || "",
-      createdAt: new Date().toISOString().split("T")[0],
+      createdAt: new Date()
     }
 
     addCustomer(customerToAdd)
@@ -160,7 +160,11 @@ export default function CustomerManager() {
                     <div className="text-sm text-gray-900">{customer.email}</div>
                     <div className="text-sm text-gray-500">{customer.phone}</div>
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{customer.createdAt}</td>
+                  <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{new Date(customer.createdAt).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})}</td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm">
                     <div className="flex space-x-2">
                       <button
@@ -499,7 +503,7 @@ export default function CustomerManager() {
               </div>
               <div className="ml-4">
                 <h4 className="text-xl font-bold text-gray-900">{currentCustomer.name}</h4>
-                <p className="text-sm text-gray-500">Customer since {currentCustomer.createdAt}</p>
+                <p className="text-sm text-gray-500">Customer since {currentCustomer.createdAt.toISOString().split("T")[0]}</p>
               </div>
             </div>
 

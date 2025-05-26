@@ -5,7 +5,8 @@ import Image from "next/image"
 import { useAdmin } from "@/app/context/admin-context"
 import { Save, Eye, ArrowUp, ArrowDown, X, Check, AlertCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
-import type { Product } from "@/lib/product"
+import type { Product } from "@/lib/types"
+import { getMainProductImage } from "@/lib/get-main-product-image"
 
 export default function HomepageManager() {
   const { products, featuredProducts, setFeaturedProducts } = useAdmin()
@@ -15,7 +16,7 @@ export default function HomepageManager() {
   const [isSaved, setIsSaved] = useState(false)
 
   // Get all products for the active category
-  const categoryProducts = products.filter((product) => product.category === activeCategory)
+  const categoryProducts = products.filter((product) => product.category?.name === activeCategory)
 
   // Get the currently selected products for the active category
   const currentSelected = selectedProducts[activeCategory] || []
@@ -163,12 +164,13 @@ export default function HomepageManager() {
             currentSelected.map((productId, index) => {
               const product = getProductById(productId)
               if (!product) return null
+              const mainImage = getMainProductImage(product)
 
               return (
                 <div key={productId} className="flex items-center rounded-lg border border-gray-200 bg-white p-3">
                   <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md bg-gray-100">
                     <Image
-                      src={product.images[0] || "/placeholder.svg"}
+                      src={mainImage}
                       alt={product.name}
                       fill
                       className="object-cover"
@@ -230,6 +232,7 @@ export default function HomepageManager() {
             {categoryProducts.map((product) => {
               const isSelected = currentSelected.includes(product.id)
 
+
               return (
                 <div
                   key={product.id}
@@ -240,7 +243,7 @@ export default function HomepageManager() {
                 >
                   <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md bg-gray-100">
                     <Image
-                      src={product.images[0] || "/placeholder.svg"}
+                      src={getMainProductImage(product)}
                       alt={product.name}
                       fill
                       className="object-cover"
@@ -306,7 +309,7 @@ export default function HomepageManager() {
                           <div key={product.id} className="overflow-hidden rounded-lg border border-gray-200 bg-white">
                             <div className="relative aspect-[3/4] w-full bg-gray-100">
                               <Image
-                                src={product.images[0] || "/placeholder.svg"}
+                                src={getMainProductImage(product)}
                                 alt={product.name}
                                 fill
                                 className="object-cover"

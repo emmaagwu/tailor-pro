@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, ShoppingBag, LayoutGrid, Type, Users, Menu, X } from "lucide-react"
+import { LayoutDashboard, ShoppingBag, LayoutGrid, Type, Users, Menu, X, Tags } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export default function AdminSidebar() {
@@ -12,6 +12,7 @@ export default function AdminSidebar() {
 
   const navItems = [
     { name: "Dashboard", href: "/admin", icon: <LayoutDashboard className="h-5 w-5" /> },
+    { name: "Categories", href: "/admin/categories", icon: <Tags className="h-5 w-5" /> },
     { name: "Products", href: "/admin/products", icon: <ShoppingBag className="h-5 w-5" /> },
     { name: "Homepage", href: "/admin/homepage", icon: <LayoutGrid className="h-5 w-5" /> },
     { name: "UI Texts", href: "/admin/ui-texts", icon: <Type className="h-5 w-5" /> },
