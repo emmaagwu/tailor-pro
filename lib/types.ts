@@ -36,18 +36,17 @@ export interface Product {
   features?: ProductFeature[]
 }
 
-export type EditableProduct = {
-  id?: string
-  name?: string
-  code?: string
-  price?: number
-  description?: string
-  material?: string
-  rating?: number
-  categoryId?: string
+export type EditableProduct = { id: string } & NewProductInput
+
+
+export type NewProductInput = Omit<
+  Product,
+  "id" | "createdAt" | "updatedAt" | "features" | "images"
+> & {
   features?: string[]
-  images?: string[] // or something else, depending on what you’re using
+  images?: string[]
 }
+
 
 export interface ProductImage {
   id: string

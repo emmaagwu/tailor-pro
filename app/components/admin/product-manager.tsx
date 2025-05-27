@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { useAdmin } from "@/app/context/admin-context"
 import { Plus, Search, Edit, Trash2, ChevronDown, X, Check, AlertCircle } from "lucide-react"
-import type { Product, EditableProduct } from "@/lib/types"
+import type { Product, NewProductInput, EditableProduct } from "@/lib/types"
 import ImageUpload from "./image-upload"
 import { formatPrice, generateProductCode } from "@/lib/utils"
 import { mapToImageObjects } from "@/lib/utils"
@@ -18,9 +18,9 @@ export default function ProductManager() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [currentProduct, setCurrentProduct] = useState<EditableProduct | null>(null)
-  const [productToDelete, setProductToDelete] = useState<Product | null>(null)
+  const [, setProductToDelete] = useState<Product | null>(null)
 
-  const [newProduct, setNewProduct] = useState<EditableProduct>({
+  const [newProduct, setNewProduct] = useState<NewProductInput>({
     name: "",
     code: "",
     price: 99.99,
@@ -64,8 +64,10 @@ export default function ProductManager() {
       price: product.price,
       description: product.description,
       material: product.material ?? "",
+      rating: product.rating,
       categoryId: product.categoryId,
       features: product.features?.map((f) => f.text) || [],
+      images: product.images?.map((img) => img.url) || [],
     }
 
     setCurrentProduct(editable)
@@ -153,9 +155,34 @@ export default function ProductManager() {
   }
 
   // Handle add product
+  // const handleAddProduct = async () => {
+  //   try {
+  //     await addProduct(newProduct as EditableProduct)
+  //     setIsAddModalOpen(false)
+  //     setNewProduct({
+  //       name: "",
+  //       code: "",
+  //       price: 99.99,
+  //       description: "",
+  //       material: "",
+  //       rating: 4,
+  //       categoryId: categories[0]?.id || "",
+  //       features: [],
+  //     })
+  //   } catch (error) {
+  //     console.error("Failed to add product:", error)
+  //     // Handle error (e.g., show error message)
+  //   }
+  // }
+
   const handleAddProduct = async () => {
     try {
-      await addProduct(newProduct as any)
+      await addProduct(
+        newProduct as Omit<Product, "id" | "createdAt" | "updatedAt"> & {
+          features?: string[]
+          images?: string[]
+        }
+      )
       setIsAddModalOpen(false)
       setNewProduct({
         name: "",
@@ -166,6 +193,7 @@ export default function ProductManager() {
         rating: 4,
         categoryId: categories[0]?.id || "",
         features: [],
+        images: [],
       })
     } catch (error) {
       console.error("Failed to add product:", error)
@@ -174,10 +202,23 @@ export default function ProductManager() {
   }
 
   // Handle update product
+  // const handleUpdateProduct = async () => {
+  //   if (currentProduct) {
+  //     try {
+  //       await updateProduct(currentProduct as EditableProduct)
+  //       setIsEditModalOpen(false)
+  //       setCurrentProduct(null)
+  //     } catch (error) {
+  //       console.error("Failed to update product:", error)
+  //       // Handle error (e.g., show error message)
+  //     }
+  //   }
+  // }
+
   const handleUpdateProduct = async () => {
     if (currentProduct) {
       try {
-        await updateProduct(currentProduct as any)
+        await updateProduct(currentProduct as { id: string } & NewProductInput)
         setIsEditModalOpen(false)
         setCurrentProduct(null)
       } catch (error) {
@@ -675,7 +716,7 @@ export default function ProductManager() {
               </div>
               <h3 className="text-lg font-bold text-gray-900">Delete Product</h3>
               <p className="mt-2 text-gray-500">
-                Are you sure you want to delete "{currentProduct.name}"? This action cannot be undone.
+                Are you sure you want to delete &quot;{currentProduct.name}&quot;? This action cannot be undone.
               </p>
             </div>
 

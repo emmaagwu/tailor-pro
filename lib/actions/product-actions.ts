@@ -6,7 +6,7 @@ import { put, del } from "@vercel/blob"
 import { prisma } from "@/lib/prisma/db"
 import { serializeProduct, serializeProducts } from "@/lib/serializers/product"
 // import { Decimal } from "@/lib/generated/prisma/runtime/library"
-import { Decimal } from "@prisma/client/runtime/library"
+// import { Decimal } from "@prisma/client/runtime/library"
 
 
 

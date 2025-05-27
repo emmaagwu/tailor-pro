@@ -272,7 +272,7 @@ export default function CategoryManager() {
               </div>
               <h3 className="text-lg font-bold text-gray-900">Delete Category</h3>
               <p className="mt-2 text-gray-500">
-                Are you sure you want to delete "{currentCategory.name}"? This action cannot be undone.
+                Are you sure you want to delete &quot;{currentCategory.name}&quot;? This action cannot be undone.
               </p>
               {currentCategory._count?.products && currentCategory._count.products > 0 && (
                 <p className="mt-2 text-sm text-red-500">

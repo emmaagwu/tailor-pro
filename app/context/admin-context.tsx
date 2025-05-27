@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { createContext, useContext, useState, useEffect } from "react"
-import type { Product, Category } from "@/lib/types"
+import type { Product, Category, NewProductInput, EditableProduct } from "@/lib/types"
 import { getProducts, createProduct, updateProduct, deleteProduct } from "@/lib/actions/product-actions"
 import { getCategories, createCategory, updateCategory, deleteCategory } from "@/lib/actions/category-actions"
 import { getUITexts, updateUIText as updateUITextAction } from "@/lib/actions/ui-text-actions"
@@ -46,9 +46,13 @@ interface AdminContextType {
   }
   refreshData: (dataType: "products" | "categories" | "uiTexts" | "customers" | "all") => Promise<void>
   addProduct: (
-    product: Omit<Product, "id" | "createdAt" | "updatedAt" | "images" | "features"> & { features?: string[] },
+    product: Omit<Product, "id" | "createdAt" | "updatedAt"> & {
+      features?: string[]
+      images?: string[]
+    }
   ) => Promise<Product>
-  updateProduct: (product: Product & { features?: string[] }) => Promise<Product>
+  // updateProduct: (product: Product & { features?: string[] }) => Promise<Product>
+  updateProduct: (product: EditableProduct) => Promise<any>
   deleteProduct: (id: string) => Promise<void>
   addCategory: (category: { name: string; description?: string | null }) => Promise<Category>
   updateCategory: (category: Category) => Promise<Category>
@@ -189,7 +193,9 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   // Add a new product
   const addProduct = async (
-    product: Omit<Product, "id" | "createdAt" | "updatedAt" | "images" | "features"> & { features?: string[] },
+    product: Omit<Product, "id" | "createdAt" | "updatedAt" > & { features?: string[];
+    images?: string[];
+    },
   ) => {
     try {
       const newProduct = await createProduct(product)
@@ -202,7 +208,21 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   }
 
   // Update an existing product
-  const updateProductFn = async (product: Product & { features?: string[] }) => {
+  // const updateProductFn = async (product: Product & { features?: string[] }) => {
+  //   try {
+  //     const { id, ...data } = product
+  //     const updatedProduct = await updateProduct(id, data)
+  //     await refreshData("products")
+  //     return updatedProduct
+  //   } catch (err) {
+  //     console.error("Failed to update product:", err)
+  //     throw err
+  //   }
+  // }
+
+  const updateProductFn = async (
+    product: { id: string } & NewProductInput
+  ): Promise<Product> => {
     try {
       const { id, ...data } = product
       const updatedProduct = await updateProduct(id, data)

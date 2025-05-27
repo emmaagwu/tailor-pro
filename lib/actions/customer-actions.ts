@@ -30,6 +30,42 @@ export async function getCustomers(): Promise<Customer[]> {
 }
 
 // Create a new customer
+// export async function createCustomer(data: {
+//   name: string
+//   email: string
+//   phone: string
+//   measurements: Record<string, string>
+//   selectedWears: string[]
+//   notes: string
+// }): Promise<Customer> {
+//   try {
+//     const { selectedWears, ...customerData } = data
+
+//     const customer = await prisma.customer.create({
+//       data: {
+//         ...customerData,
+//         measurements: customerData.measurements as any,
+//       },
+//     })
+
+//     revalidatePath("/admin/customers")
+
+//     return {
+//       ...customer,
+//       measurements: customer.measurements as Record<string, string>,
+//       selectedWears: [],
+//       notes: customer.notes || "",
+//       // createdAt: customer.createdAt.toISOString().split("T")[0],
+//       createdAt: customer.createdAt,
+//     }
+//   } catch (error) {
+//     console.error("Failed to create customer:", error)
+//     throw new Error("Failed to create customer")
+//   }
+// }
+
+
+
 export async function createCustomer(data: {
   name: string
   email: string
@@ -39,12 +75,10 @@ export async function createCustomer(data: {
   notes: string
 }): Promise<Customer> {
   try {
-    const { selectedWears, ...customerData } = data
-
     const customer = await prisma.customer.create({
       data: {
-        ...customerData,
-        measurements: customerData.measurements as any,
+        ...data,
+        measurements: data.measurements as Record<string, string>,
       },
     })
 
@@ -55,7 +89,6 @@ export async function createCustomer(data: {
       measurements: customer.measurements as Record<string, string>,
       selectedWears: [],
       notes: customer.notes || "",
-      // createdAt: customer.createdAt.toISOString().split("T")[0],
       createdAt: customer.createdAt,
     }
   } catch (error) {
@@ -65,6 +98,37 @@ export async function createCustomer(data: {
 }
 
 // Update a customer
+// export async function updateCustomer(
+//   id: string,
+//   data: {
+//     name: string
+//     email: string
+//     phone: string
+//     measurements: Record<string, string>
+//     selectedWears: string[]
+//     notes: string
+//   },
+// ) {
+//   try {
+//     const { selectedWears, ...customerData } = data
+
+//     await prisma.customer.update({
+//       where: { id },
+//       data: {
+//         ...customerData,
+//         measurements: customerData.measurements as any,
+//       },
+//     })
+
+//     revalidatePath("/admin/customers")
+//     return { success: true }
+//   } catch (error) {
+//     console.error(`Failed to update customer with ID ${id}:`, error)
+//     throw new Error(`Failed to update customer with ID ${id}`)
+//   }
+// }
+
+
 export async function updateCustomer(
   id: string,
   data: {
@@ -77,13 +141,11 @@ export async function updateCustomer(
   },
 ) {
   try {
-    const { selectedWears, ...customerData } = data
-
     await prisma.customer.update({
       where: { id },
       data: {
-        ...customerData,
-        measurements: customerData.measurements as any,
+        ...data,
+        measurements: data.measurements as Record<string, string>,
       },
     })
 
