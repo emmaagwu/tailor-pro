@@ -2,6 +2,13 @@ import { prisma } from "./db"
 import { hashPassword } from "@/utils/hash"
 
 
+// Define known categories as a union type
+type CategoryName = "kaftan" | "agbada" | "suit" | "shirt"
+
+// Strongly type the map to avoid 'any' and TS errors
+type CategoryMap = Record<CategoryName, string>
+
+
 
 async function main() {
   console.log("Starting seed...");
@@ -48,9 +55,9 @@ async function main() {
   // Get created categories
   const createdCategories = await prisma.category.findMany();
   const categoryMap = createdCategories.reduce((acc, cat) => {
-    acc[cat.name] = cat.id;
+    acc[cat.name as CategoryName] = cat.id;
     return acc;
-  }, {});
+  }, {} as CategoryMap);
 
   // Generate products for each category
   await generateKaftanProducts(categoryMap.kaftan);
@@ -61,7 +68,7 @@ async function main() {
   console.log("Seeding completed!");
 }
 
-async function generateKaftanProducts(categoryId) {
+async function generateKaftanProducts(categoryId: string) {
   const colors = ["Blue", "White", "Green", "Black", "Red", "Navy", "Gray", "Brown", "Cream", "Gold"];
   const styles = ["Premium", "Classic", "Modern", "Royal", "Traditional", "Elegant", "Luxury", "Designer"];
   const materials = [
@@ -137,11 +144,11 @@ async function generateKaftanProducts(categoryId) {
       }
     });
 
-    console.log(`Created kaftan product: ${name}`);
+    console.log(`Created kaftan product: ${product.name}`);
   }
 }
 
-async function generateAgbadaProducts(categoryId) {
+async function generateAgbadaProducts(categoryId: string) {
   const colors = ["Green", "Blue", "Cream", "Black", "White", "Gold", "Purple", "Red", "Navy", "Burgundy"];
   const styles = ["Luxurious", "Royal", "Traditional", "Premium", "Ceremonial", "Classic", "Regal", "Elegant"];
   const materials = [
@@ -217,11 +224,11 @@ async function generateAgbadaProducts(categoryId) {
       }
     });
 
-    console.log(`Created agbada product: ${name}`);
+    console.log(`Created agbada product: ${product.name}`);
   }
 }
 
-async function generateSuitProducts(categoryId) {
+async function generateSuitProducts(categoryId: string) {
   const colors = ["Navy Blue", "Charcoal Grey", "Black", "Light Beige", "Dark Blue", "Light Grey", "Pinstripe", "Burgundy"];
   const styles = ["Classic", "Modern Slim", "Business", "Formal", "Premium", "Designer", "Executive", "Professional"];
   const materials = [
@@ -297,11 +304,11 @@ async function generateSuitProducts(categoryId) {
       }
     });
 
-    console.log(`Created suit product: ${name}`);
+    console.log(`Created suit product: ${product.name}`);
   }
 }
 
-async function generateShirtProducts(categoryId) {
+async function generateShirtProducts(categoryId: string) {
   const colors = ["White", "Light Blue", "Black", "Checkered", "Striped", "Pink", "Lavender", "Sky Blue"];
   const styles = ["Dress", "Business", "Casual", "Formal", "Premium", "Classic", "Modern", "Designer"];
   const materials = [
@@ -373,7 +380,7 @@ async function generateShirtProducts(categoryId) {
       }
     });
 
-    console.log(`Created shirt product: ${name}`);
+    console.log(`Created shirt product: ${product.name}`);
   }
 }
 
