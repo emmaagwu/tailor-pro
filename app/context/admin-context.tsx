@@ -52,7 +52,7 @@ interface AdminContextType {
     }
   ) => Promise<Product>
   // updateProduct: (product: Product & { features?: string[] }) => Promise<Product>
-  updateProduct: (product: EditableProduct) => Promise<any>
+  updateProduct: (product: EditableProduct) => Promise<Product>
   deleteProduct: (id: string) => Promise<void>
   addCategory: (category: { name: string; description?: string | null }) => Promise<Category>
   updateCategory: (category: Category) => Promise<Category>
