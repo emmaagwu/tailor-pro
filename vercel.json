@@ -3,7 +3,7 @@
     "api/**.js": {
       "includeFiles": "lib/generated/prisma/**"
     },
-    "api/**.ts": {
+    "app/**/*.ts": {
       "includeFiles": "lib/generated/prisma/**"
     }
   }
