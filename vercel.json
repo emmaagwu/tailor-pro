@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "api/**/*.ts": {
+      "includeFiles": [
+        "lib/generated/prisma/**"
+      ]
+    }
+  }
+}
