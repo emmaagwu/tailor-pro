@@ -279,6 +279,9 @@ export default function Navbar() {
         <LoginModal
           isOpen={showLoginModal}
           onClose={() => setShowLoginModal(false)}
+          onSubmit={(email, password) => {
+            console.log("Login attempt:", email, password)
+          }}
         />
 
         {/* Mobile Navigation */}
