@@ -91,8 +91,8 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   // Load initial data
   useEffect(() => {
-    loadProducts()
     loadCategories()
+    loadProducts()
     loadUITexts()
     loadCustomers()
   }, [])
@@ -167,6 +167,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     try {
       const data = await getCustomers()
       setCustomers(data)
+      console.log("Loaded customers:", data)
     } catch (err) {
       console.error("Failed to load customers:", err)
       setError((prev) => ({ ...prev, customers: "Failed to load customers" }))

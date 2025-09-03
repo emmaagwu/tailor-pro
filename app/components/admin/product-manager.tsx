@@ -154,26 +154,6 @@ export default function ProductManager() {
     }
   }
 
-  // Handle add product
-  // const handleAddProduct = async () => {
-  //   try {
-  //     await addProduct(newProduct as EditableProduct)
-  //     setIsAddModalOpen(false)
-  //     setNewProduct({
-  //       name: "",
-  //       code: "",
-  //       price: 99.99,
-  //       description: "",
-  //       material: "",
-  //       rating: 4,
-  //       categoryId: categories[0]?.id || "",
-  //       features: [],
-  //     })
-  //   } catch (error) {
-  //     console.error("Failed to add product:", error)
-  //     // Handle error (e.g., show error message)
-  //   }
-  // }
 
   const handleAddProduct = async () => {
     try {
@@ -201,19 +181,7 @@ export default function ProductManager() {
     }
   }
 
-  // Handle update product
-  // const handleUpdateProduct = async () => {
-  //   if (currentProduct) {
-  //     try {
-  //       await updateProduct(currentProduct as EditableProduct)
-  //       setIsEditModalOpen(false)
-  //       setCurrentProduct(null)
-  //     } catch (error) {
-  //       console.error("Failed to update product:", error)
-  //       // Handle error (e.g., show error message)
-  //     }
-  //   }
-  // }
+
 
   const handleUpdateProduct = async () => {
     if (currentProduct) {

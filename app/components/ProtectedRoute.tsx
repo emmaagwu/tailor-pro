@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isLoggedIn, loading } = useAuth()
+
   const router = useRouter()
 
   useEffect(() => {

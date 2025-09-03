@@ -37,7 +37,7 @@ export default function AdminSidebar() {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden w-64 flex-shrink-0 bg-[#5D4037] text-white md:block">
+      <aside className="hidden w-64 fixed left-0 top-0 h-screen flex-shrink-0 bg-[#5D4037] text-white md:block">
         <div className="p-6">
           <Link href="/admin" className="flex items-center">
             <span className="text-xl font-bold">Grandeur Admin</span>

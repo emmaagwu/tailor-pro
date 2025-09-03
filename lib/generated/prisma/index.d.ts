@@ -7903,6 +7903,7 @@ export namespace Prisma {
     email: number
     phone: number
     measurements: number
+    selectedWears: number
     notes: number
     createdAt: number
     updatedAt: number
@@ -7936,6 +7937,7 @@ export namespace Prisma {
     email?: true
     phone?: true
     measurements?: true
+    selectedWears?: true
     notes?: true
     createdAt?: true
     updatedAt?: true
@@ -8020,7 +8022,8 @@ export namespace Prisma {
     email: string
     phone: string
     measurements: JsonValue
-    notes: string | null
+    selectedWears: string[]
+    notes: string
     createdAt: Date
     updatedAt: Date
     _count: CustomerCountAggregateOutputType | null
@@ -8048,6 +8051,7 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     measurements?: boolean
+    selectedWears?: boolean
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8059,6 +8063,7 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     measurements?: boolean
+    selectedWears?: boolean
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8070,6 +8075,7 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     measurements?: boolean
+    selectedWears?: boolean
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8081,12 +8087,13 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     measurements?: boolean
+    selectedWears?: boolean
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CustomerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "measurements" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["customer"]>
+  export type CustomerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "measurements" | "selectedWears" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["customer"]>
 
   export type $CustomerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Customer"
@@ -8097,7 +8104,8 @@ export namespace Prisma {
       email: string
       phone: string
       measurements: Prisma.JsonValue
-      notes: string | null
+      selectedWears: string[]
+      notes: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["customer"]>
@@ -8528,6 +8536,7 @@ export namespace Prisma {
     readonly email: FieldRef<"Customer", 'String'>
     readonly phone: FieldRef<"Customer", 'String'>
     readonly measurements: FieldRef<"Customer", 'Json'>
+    readonly selectedWears: FieldRef<"Customer", 'String[]'>
     readonly notes: FieldRef<"Customer", 'String'>
     readonly createdAt: FieldRef<"Customer", 'DateTime'>
     readonly updatedAt: FieldRef<"Customer", 'DateTime'>
@@ -8987,6 +8996,7 @@ export namespace Prisma {
     email: 'email',
     phone: 'phone',
     measurements: 'measurements',
+    selectedWears: 'selectedWears',
     notes: 'notes',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -9495,7 +9505,8 @@ export namespace Prisma {
     email?: StringFilter<"Customer"> | string
     phone?: StringFilter<"Customer"> | string
     measurements?: JsonFilter<"Customer">
-    notes?: StringNullableFilter<"Customer"> | string | null
+    selectedWears?: StringNullableListFilter<"Customer">
+    notes?: StringFilter<"Customer"> | string
     createdAt?: DateTimeFilter<"Customer"> | Date | string
     updatedAt?: DateTimeFilter<"Customer"> | Date | string
   }
@@ -9506,7 +9517,8 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     measurements?: SortOrder
-    notes?: SortOrderInput | SortOrder
+    selectedWears?: SortOrder
+    notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9520,7 +9532,8 @@ export namespace Prisma {
     email?: StringFilter<"Customer"> | string
     phone?: StringFilter<"Customer"> | string
     measurements?: JsonFilter<"Customer">
-    notes?: StringNullableFilter<"Customer"> | string | null
+    selectedWears?: StringNullableListFilter<"Customer">
+    notes?: StringFilter<"Customer"> | string
     createdAt?: DateTimeFilter<"Customer"> | Date | string
     updatedAt?: DateTimeFilter<"Customer"> | Date | string
   }, "id">
@@ -9531,7 +9544,8 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     measurements?: SortOrder
-    notes?: SortOrderInput | SortOrder
+    selectedWears?: SortOrder
+    notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CustomerCountOrderByAggregateInput
@@ -9548,7 +9562,8 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Customer"> | string
     phone?: StringWithAggregatesFilter<"Customer"> | string
     measurements?: JsonWithAggregatesFilter<"Customer">
-    notes?: StringNullableWithAggregatesFilter<"Customer"> | string | null
+    selectedWears?: StringNullableListFilter<"Customer">
+    notes?: StringWithAggregatesFilter<"Customer"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Customer"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Customer"> | Date | string
   }
@@ -9932,7 +9947,8 @@ export namespace Prisma {
     email: string
     phone: string
     measurements?: JsonNullValueInput | InputJsonValue
-    notes?: string | null
+    selectedWears?: CustomerCreateselectedWearsInput | string[]
+    notes: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9943,7 +9959,8 @@ export namespace Prisma {
     email: string
     phone: string
     measurements?: JsonNullValueInput | InputJsonValue
-    notes?: string | null
+    selectedWears?: CustomerCreateselectedWearsInput | string[]
+    notes: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9954,7 +9971,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     measurements?: JsonNullValueInput | InputJsonValue
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedWears?: CustomerUpdateselectedWearsInput | string[]
+    notes?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9965,7 +9983,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     measurements?: JsonNullValueInput | InputJsonValue
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedWears?: CustomerUpdateselectedWearsInput | string[]
+    notes?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9976,7 +9995,8 @@ export namespace Prisma {
     email: string
     phone: string
     measurements?: JsonNullValueInput | InputJsonValue
-    notes?: string | null
+    selectedWears?: CustomerCreateselectedWearsInput | string[]
+    notes: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9987,7 +10007,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     measurements?: JsonNullValueInput | InputJsonValue
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedWears?: CustomerUpdateselectedWearsInput | string[]
+    notes?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9998,7 +10019,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     measurements?: JsonNullValueInput | InputJsonValue
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedWears?: CustomerUpdateselectedWearsInput | string[]
+    notes?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10395,12 +10417,21 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type CustomerCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
     measurements?: SortOrder
+    selectedWears?: SortOrder
     notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -10650,6 +10681,15 @@ export namespace Prisma {
     upsert?: ProductUpsertWithoutFeaturesInput
     connect?: ProductWhereUniqueInput
     update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutFeaturesInput, ProductUpdateWithoutFeaturesInput>, ProductUncheckedUpdateWithoutFeaturesInput>
+  }
+
+  export type CustomerCreateselectedWearsInput = {
+    set: string[]
+  }
+
+  export type CustomerUpdateselectedWearsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {

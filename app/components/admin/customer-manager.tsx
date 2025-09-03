@@ -18,6 +18,12 @@ export default function CustomerManager() {
     selectedWears: [],
   })
 
+  // Product search states for modals
+  const [productSearchTerm, setProductSearchTerm] = useState("")
+  const [showProductDropdown, setShowProductDropdown] = useState(false)
+  const [editProductSearchTerm, setEditProductSearchTerm] = useState("")
+  const [showEditProductDropdown, setShowEditProductDropdown] = useState(false)
+
   // Filter customers based on search term
   const filteredCustomers = customers.filter((customer) => {
     const searchLower = searchTerm.toLowerCase()
@@ -28,9 +34,24 @@ export default function CustomerManager() {
     )
   })
 
+  // Filter products for search dropdown
+  const getFilteredProducts = (searchTerm: string, selectedWears: string[]) => {
+    if (!searchTerm.trim()) return []
+
+    return products
+      .filter((product) => {
+        const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        const notAlreadySelected = !selectedWears.includes(product.id)
+        return matchesSearch && notAlreadySelected
+      })
+      .slice(0, 5) // Limit to 5 results
+  }
+
   // Handle customer edit
   const handleEditClick = (customer: Customer) => {
     setCurrentCustomer(customer)
+    setEditProductSearchTerm("")
+    setShowEditProductDropdown(false)
     setIsEditModalOpen(true)
   }
 
@@ -70,7 +91,7 @@ export default function CustomerManager() {
       measurements: newCustomer.measurements || {},
       selectedWears: newCustomer.selectedWears || [],
       notes: newCustomer.notes || "",
-      createdAt: new Date()
+      createdAt: new Date(),
     }
 
     addCustomer(customerToAdd)
@@ -79,6 +100,8 @@ export default function CustomerManager() {
       measurements: {},
       selectedWears: [],
     })
+    setProductSearchTerm("")
+    setShowProductDropdown(false)
   }
 
   // Handle update customer
@@ -87,6 +110,8 @@ export default function CustomerManager() {
       updateCustomer(currentCustomer)
       setIsEditModalOpen(false)
       setCurrentCustomer(null)
+      setEditProductSearchTerm("")
+      setShowEditProductDropdown(false)
     }
   }
 
@@ -95,6 +120,56 @@ export default function CustomerManager() {
     const product = products.find((p) => p.id === id)
     return product ? product.name : "Unknown Product"
   }
+
+  // Add product to new customer
+  const addProductToNewCustomer = (productId: string) => {
+    setNewCustomer((prev) => ({
+      ...prev,
+      selectedWears: [...(prev.selectedWears || []), productId],
+    }))
+    setProductSearchTerm("")
+    setShowProductDropdown(false)
+  }
+
+  // Remove product from new customer
+  const removeProductFromNewCustomer = (productId: string) => {
+    setNewCustomer((prev) => ({
+      ...prev,
+      selectedWears: (prev.selectedWears || []).filter((id) => id !== productId),
+    }))
+  }
+
+  // Add product to current customer (edit mode)
+  const addProductToCurrentCustomer = (productId: string) => {
+    if (currentCustomer) {
+      setCurrentCustomer((prev) =>
+        prev
+          ? {
+              ...prev,
+              selectedWears: [...prev.selectedWears, productId],
+            }
+          : null,
+      )
+      setEditProductSearchTerm("")
+      setShowEditProductDropdown(false)
+    }
+  }
+
+  // Remove product from current customer (edit mode)
+  const removeProductFromCurrentCustomer = (productId: string) => {
+    if (currentCustomer) {
+      setCurrentCustomer((prev) =>
+        prev
+          ? {
+              ...prev,
+              selectedWears: prev.selectedWears.filter((id) => id !== productId),
+            }
+          : null,
+      )
+    }
+  }
+
+  console.log(customers)
 
   return (
     <div className="space-y-6">
@@ -138,6 +213,7 @@ export default function CustomerManager() {
               <tr className="border-b border-gray-200 bg-gray-50 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                 <th className="px-6 py-3">Customer</th>
                 <th className="px-6 py-3">Contact</th>
+                <th className="px-6 py-3">Selected Products</th>
                 <th className="px-6 py-3">Date Added</th>
                 <th className="px-6 py-3">Actions</th>
               </tr>
@@ -160,11 +236,37 @@ export default function CustomerManager() {
                     <div className="text-sm text-gray-900">{customer.email}</div>
                     <div className="text-sm text-gray-500">{customer.phone}</div>
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{new Date(customer.createdAt).toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-})}</td>
+                  <td className="px-6 py-4">
+                    <div className="text-sm text-gray-900">
+                      {customer.selectedWears.length > 0 ? (
+                        <div className="flex flex-wrap gap-1">
+                          {customer.selectedWears.slice(0, 2).map((wearId) => (
+                            <span
+                              key={wearId}
+                              className="inline-flex items-center rounded-full bg-[#5D4037]/10 px-2 py-1 text-xs text-[#5D4037]"
+                            >
+                              {getProductNameById(wearId)}
+                            </span>
+                          ))}
+                          {customer.selectedWears.length > 2 && (
+                            <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-600">
+                              +{customer.selectedWears.length - 2} more
+                            </span>
+                          )}
+                        </div>
+                      ) : (
+                        <span className="text-gray-500">No products selected</span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{customer.createdAt.toLocaleString("en-US", {
+                      month: "short",   // "Sep"
+                      day: "numeric",   // "3"
+                      year: "numeric",  // "2025"
+                      hour: "numeric",  // "5"
+                      minute: "2-digit",// "00"
+                      hour12: true,     // "PM"
+                    })}</td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm">
                     <div className="flex space-x-2">
                       <button
@@ -192,7 +294,7 @@ export default function CustomerManager() {
 
               {filteredCustomers.length === 0 && (
                 <tr>
-                  <td colSpan={4} className="px-6 py-10 text-center">
+                  <td colSpan={5} className="px-6 py-10 text-center">
                     <div className="flex flex-col items-center">
                       <User className="mb-2 h-8 w-8 text-gray-400" />
                       <p className="text-gray-500">No customers found</p>
@@ -212,7 +314,11 @@ export default function CustomerManager() {
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-bold text-[#5D4037]">Add New Customer</h3>
               <button
-                onClick={() => setIsAddModalOpen(false)}
+                onClick={() => {
+                  setIsAddModalOpen(false)
+                  setProductSearchTerm("")
+                  setShowProductDropdown(false)
+                }}
                 className="rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
               >
                 <X className="h-5 w-5" />
@@ -315,6 +421,69 @@ export default function CustomerManager() {
                 </div>
               </div>
 
+              {/* Product Selection */}
+              <div>
+                <label className="mb-1 block text-sm font-medium text-gray-700">Selected Products</label>
+
+                {/* Selected Products Display */}
+                {newCustomer.selectedWears && newCustomer.selectedWears.length > 0 && (
+                  <div className="mb-3 flex flex-wrap gap-2">
+                    {newCustomer.selectedWears.map((wearId) => (
+                      <div
+                        key={wearId}
+                        className="flex items-center rounded-full bg-[#5D4037]/10 px-3 py-1 text-sm text-[#5D4037]"
+                      >
+                        <span>{getProductNameById(wearId)}</span>
+                        <button
+                          onClick={() => removeProductFromNewCustomer(wearId)}
+                          className="ml-2 text-[#5D4037]/60 hover:text-[#5D4037]"
+                        >
+                          <X className="h-3 w-3" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Product Search */}
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search products to add..."
+                    value={productSearchTerm}
+                    onChange={(e) => {
+                      setProductSearchTerm(e.target.value)
+                      setShowProductDropdown(e.target.value.length > 0)
+                    }}
+                    onFocus={() => setShowProductDropdown(productSearchTerm.length > 0)}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-[#5D4037] focus:outline-none focus:ring-1 focus:ring-[#5D4037]"
+                  />
+                  <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+
+                  {/* Product Dropdown */}
+                  {showProductDropdown && (
+                    <div className="absolute z-10 mt-1 w-full rounded-md border border-gray-300 bg-white shadow-lg">
+                      {getFilteredProducts(productSearchTerm, newCustomer.selectedWears || []).map((product) => (
+                        <button
+                          key={product.id}
+                          onClick={() => addProductToNewCustomer(product.id)}
+                          className="flex w-full items-center px-3 py-2 text-left text-sm hover:bg-gray-50"
+                        >
+                          <ShoppingBag className="mr-2 h-4 w-4 text-gray-400" />
+                          <div>
+                            <div className="font-medium">{product.name}</div>
+                            <div className="text-xs text-gray-500">{product.code}</div>
+                          </div>
+                        </button>
+                      ))}
+                      {getFilteredProducts(productSearchTerm, newCustomer.selectedWears || []).length === 0 && (
+                        <div className="px-3 py-2 text-sm text-gray-500">No products found</div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
               <div>
                 <label className="mb-1 block text-sm font-medium text-gray-700">Notes</label>
                 <textarea
@@ -328,7 +497,11 @@ export default function CustomerManager() {
 
               <div className="flex justify-end space-x-3 pt-4">
                 <button
-                  onClick={() => setIsAddModalOpen(false)}
+                  onClick={() => {
+                    setIsAddModalOpen(false)
+                    setProductSearchTerm("")
+                    setShowProductDropdown(false)
+                  }}
                   className="rounded-md border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
                 >
                   Cancel
@@ -353,7 +526,11 @@ export default function CustomerManager() {
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-bold text-[#5D4037]">Edit Customer</h3>
               <button
-                onClick={() => setIsEditModalOpen(false)}
+                onClick={() => {
+                  setIsEditModalOpen(false)
+                  setEditProductSearchTerm("")
+                  setShowEditProductDropdown(false)
+                }}
                 className="rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
               >
                 <X className="h-5 w-5" />
@@ -453,6 +630,69 @@ export default function CustomerManager() {
                 </div>
               </div>
 
+              {/* Product Selection for Edit */}
+              <div>
+                <label className="mb-1 block text-sm font-medium text-gray-700">Selected Products</label>
+
+                {/* Selected Products Display */}
+                {currentCustomer.selectedWears.length > 0 && (
+                  <div className="mb-3 flex flex-wrap gap-2">
+                    {currentCustomer.selectedWears.map((wearId) => (
+                      <div
+                        key={wearId}
+                        className="flex items-center rounded-full bg-[#5D4037]/10 px-3 py-1 text-sm text-[#5D4037]"
+                      >
+                        <span>{getProductNameById(wearId)}</span>
+                        <button
+                          onClick={() => removeProductFromCurrentCustomer(wearId)}
+                          className="ml-2 text-[#5D4037]/60 hover:text-[#5D4037]"
+                        >
+                          <X className="h-3 w-3" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Product Search for Edit */}
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search products to add..."
+                    value={editProductSearchTerm}
+                    onChange={(e) => {
+                      setEditProductSearchTerm(e.target.value)
+                      setShowEditProductDropdown(e.target.value.length > 0)
+                    }}
+                    onFocus={() => setShowEditProductDropdown(editProductSearchTerm.length > 0)}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-[#5D4037] focus:outline-none focus:ring-1 focus:ring-[#5D4037]"
+                  />
+                  <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+
+                  {/* Product Dropdown for Edit */}
+                  {showEditProductDropdown && (
+                    <div className="absolute z-10 mt-1 w-full rounded-md border border-gray-300 bg-white shadow-lg">
+                      {getFilteredProducts(editProductSearchTerm, currentCustomer.selectedWears).map((product) => (
+                        <button
+                          key={product.id}
+                          onClick={() => addProductToCurrentCustomer(product.id)}
+                          className="flex w-full items-center px-3 py-2 text-left text-sm hover:bg-gray-50"
+                        >
+                          <ShoppingBag className="mr-2 h-4 w-4 text-gray-400" />
+                          <div>
+                            <div className="font-medium">{product.name}</div>
+                            <div className="text-xs text-gray-500">{product.code}</div>
+                          </div>
+                        </button>
+                      ))}
+                      {getFilteredProducts(editProductSearchTerm, currentCustomer.selectedWears).length === 0 && (
+                        <div className="px-3 py-2 text-sm text-gray-500">No products found</div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
               <div>
                 <label className="mb-1 block text-sm font-medium text-gray-700">Notes</label>
                 <textarea
@@ -465,7 +705,11 @@ export default function CustomerManager() {
 
               <div className="flex justify-end space-x-3 pt-4">
                 <button
-                  onClick={() => setIsEditModalOpen(false)}
+                  onClick={() => {
+                    setIsEditModalOpen(false)
+                    setEditProductSearchTerm("")
+                    setShowEditProductDropdown(false)
+                  }}
                   className="rounded-md border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
                 >
                   Cancel
@@ -503,7 +747,15 @@ export default function CustomerManager() {
               </div>
               <div className="ml-4">
                 <h4 className="text-xl font-bold text-gray-900">{currentCustomer.name}</h4>
-                <p className="text-sm text-gray-500">Customer since {currentCustomer.createdAt.toISOString().split("T")[0]}</p>
+                <p className="text-sm text-gray-500">Customer since {
+                currentCustomer.createdAt.toLocaleString("en-US", {
+                month: "short",   // "Sep"
+                day: "numeric",   // "3"
+                year: "numeric",  // "2025"
+                hour: "numeric",  // "5"
+                minute: "2-digit",// "00"
+                hour12: true,     // "PM"
+              })}</p>
               </div>
             </div>
 
@@ -603,9 +855,8 @@ export default function CustomerManager() {
               </div>
               <h3 className="text-lg font-bold text-gray-900">Delete Customer</h3>
               <p className="mt-2 text-gray-500">
-                Are you sure you want to delete &quot;{currentCustomer.name}&quot;? This action cannot be undone.
+                Are you sure you want to delete "{currentCustomer.name}"? This action cannot be undone.
               </p>
-
             </div>
 
             <div className="flex justify-center space-x-3">
