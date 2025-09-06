@@ -10,7 +10,7 @@ import WishlistDropdown from "./wishlist-dropdown"
 import LoginModal from "./login-modal"
 import { cn } from "@/lib/utils"
 import { useRouter } from "next/navigation"
-
+import { loginAdmin } from "@/lib/auth/login"
 
 // Updated navigation items
 const navItems = [
@@ -60,7 +60,7 @@ export default function Navbar() {
   const [isWishlistOpen, setIsWishlistOpen] = useState(false)
   const [activePage, setActivePage] = useState("")
   const { wishlistItems } = useWishlist()
-  const { isLoggedIn, logout, loading } = useAuth() // Use auth context
+  const { isLoggedIn, login, logout, loading } = useAuth() // Use auth context
 
   const [adminHoldTimer, setAdminHoldTimer] = useState<NodeJS.Timeout | null>(null)
   const [showLoginModal, setShowLoginModal] = useState(false)
@@ -81,6 +81,19 @@ export default function Navbar() {
       setAdminHoldTimer(null)
     }
   }
+
+  const handleLogin = async (email: string, password: string) => {
+    const result = await login(email, password)
+
+    if (result.success) {
+      setShowLoginModal(false) // close modal
+      router.push("/admin") // redirect after login
+    } else {
+      alert(result.error) // show error to user
+    }
+  }
+
+
 
   // Handle logout
   const handleLogout = async () => {
@@ -279,9 +292,7 @@ export default function Navbar() {
         <LoginModal
           isOpen={showLoginModal}
           onClose={() => setShowLoginModal(false)}
-          onSubmit={(email, password) => {
-            console.log("Login attempt:", email, password)
-          }}
+          onSubmit={handleLogin}
         />
 
         {/* Mobile Navigation */}

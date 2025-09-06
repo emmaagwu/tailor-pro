@@ -1,8 +1,11 @@
+"use server"
+
 import { prisma } from "../prisma/db"
 import bcrypt from "bcryptjs"
 import { signToken } from "@/utils/jwt"
 
-export async function loginAdmin(email: string, password: string) {
+export async function loginAdmin( email : string, password : string ) {
+
   const admin = await prisma.admin.findUnique({ where: { email } })
 
   if (!admin || !(await bcrypt.compare(password, admin.password))) {
