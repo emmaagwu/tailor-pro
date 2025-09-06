@@ -113,6 +113,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
         updatedAt: new Date(product.updatedAt),
       }))
       setProducts(data)
+      console.log("Done fetching product")
     } catch (err) {
       console.error("Failed to load products:", err)
       setError((prev) => ({ ...prev, products: "Failed to load products" }))
@@ -127,6 +128,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     setError((prev) => ({ ...prev, categories: null }))
 
     try {
+      console.log("About to fetch Category now")
       const data = await getCategories()
       setCategories(data)
     } catch (err) {

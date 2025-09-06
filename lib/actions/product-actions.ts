@@ -1,4 +1,5 @@
-'use server'
+export const runtime = "nodejs"
+"use server"
 
 import { revalidatePath } from "next/cache"
 import { put, del } from "@vercel/blob"
