@@ -1,9 +1,10 @@
-export const runtime = "nodejs"
 "use server"
 
 import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma/db"
 import type { Customer } from "@/lib/types"
+
+export const runtime = "nodejs"
 
 // Get all customers
 export async function getCustomers(): Promise<Customer[]> {

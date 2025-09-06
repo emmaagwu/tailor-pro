@@ -1,4 +1,3 @@
-export const runtime = "nodejs"
 "use server"
 
 import { revalidatePath } from "next/cache"
@@ -9,7 +8,7 @@ import { serializeProduct, serializeProducts } from "@/lib/serializers/product"
 // import { Decimal } from "@/lib/generated/prisma/runtime/library"
 // import { Decimal } from "@prisma/client/runtime/library"
 
-
+export const runtime = "nodejs"
 
 // Get all products
 export async function getProducts() {

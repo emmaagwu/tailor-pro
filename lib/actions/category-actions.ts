@@ -1,9 +1,9 @@
-export const runtime = "nodejs"
 "use server"
 
 import { prisma } from '@/lib/prisma/db';
 import { revalidatePath } from 'next/cache';
 
+export const runtime = "nodejs"
 // Get all categories
 export async function getCategories() {
   try {

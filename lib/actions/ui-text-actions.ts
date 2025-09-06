@@ -1,9 +1,10 @@
-export const runtime = "nodejs"
 "use server"
 
 import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma/db"
 import type { UIText } from "@/lib/types"
+
+export const runtime = "nodejs"
 
 // Get all UI texts
 export async function getUITexts(): Promise<UIText[]> {
