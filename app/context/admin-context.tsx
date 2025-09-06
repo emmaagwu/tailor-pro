@@ -103,6 +103,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     setError((prev) => ({ ...prev, products: null }))
 
     try {
+      console.log("About to fetch Product now")
       const rawData = await getProducts()
       // Safely transform the data to match your shared Productinterface
       const data = rawData.map((product: Product) => ({

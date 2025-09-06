@@ -24,6 +24,7 @@ export async function getProducts() {
       },
     })   
     const safeProducts = serializeProducts(products)
+    console.log("THis is the safeProducts: ", safeProducts)
     return safeProducts
   } catch (error) {
     console.error("Failed to fetch products:", error)
