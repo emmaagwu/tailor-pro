@@ -10,7 +10,6 @@ import WishlistDropdown from "./wishlist-dropdown"
 import LoginModal from "./login-modal"
 import { cn } from "@/lib/utils"
 import { useRouter } from "next/navigation"
-import { loginAdmin } from "@/lib/auth/login"
 
 // Updated navigation items
 const navItems = [
