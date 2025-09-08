@@ -143,7 +143,7 @@ export function transformCustomerForPrisma(
 ): Omit<PrismaCustomer, 'id' | 'createdAt' | 'updatedAt'> {
   return {
     ...customer,
-    measurements: customer.measurements as any // JsonValue
+    measurements: customer.measurements as Prisma.JsonValue // JsonValue
   }
 }
 
