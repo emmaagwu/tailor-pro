@@ -2,7 +2,8 @@
 
 import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma/db"
-import type { Customer } from "@/lib/types"
+// import type { Customer } from "@/lib/types"
+import type { Customer } from "@prisma/client"
 
 
 
@@ -24,6 +25,7 @@ export async function getCustomers(): Promise<Customer[]> {
       selectedWears: customer.selectedWears || [],
       notes: customer.notes || "",
       createdAt: customer.createdAt,
+      updatedAt: customer.updatedAt,
     }))
   } catch (error) {
     console.error("Failed to fetch customers:", error)
