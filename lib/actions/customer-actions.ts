@@ -2,8 +2,8 @@
 
 import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma/db"
-// import type { Customer } from "@/lib/types"
-import type { Customer } from "@prisma/client"
+import type { Customer } from "@/lib/types"
+
 
 
 

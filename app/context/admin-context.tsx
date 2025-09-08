@@ -12,6 +12,7 @@ import {
   updateCustomer as updateCustomerAction,
   deleteCustomer as deleteCustomerAction,
 } from "@/lib/actions/customer-actions"
+// import type { Customer } from "@prisma/client"
 
 // Define types for our context
 
