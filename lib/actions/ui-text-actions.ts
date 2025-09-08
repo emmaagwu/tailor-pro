@@ -11,6 +11,7 @@ export async function getUITexts(): Promise<UIText[]> {
   try {
     const texts = await prisma.uIText.findMany()
     return texts.map((text) => ({
+      id: text.id,
       key: text.key,
       value: text.value,
     }))
